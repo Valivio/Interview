@@ -30,15 +30,23 @@ app.get('/api/test-key', async (_req, res) => {
   }
 });
 
-// Pytania (na start tekstowe; audio jest opcjonalne)
+// Pytania: najpierw czytaj manifest z pliku, w razie braku – zwróć fallback
 app.get('/api/questions', async (_req, res) => {
-  // Jeśli zechcesz, możesz później dodać public/questions/questions.json z audioUrl
-  res.json({
-    items: [
-      { id: 1, text: 'Opowiedz krótko o sobie i swoim doświadczeniu. Podkreśl umiejętności istotne dla stanowiska.' },
-      { id: 2, text: 'Z jakiego osiągnięcia zawodowego jesteś najbardziej dumny i dlaczego? Opisz też swój wkład.' }
-    ]
-  });
+  const qPath = path.join(__dirname, 'public', 'questions', 'questions.json');
+  try {
+    const raw = await fsp.readFile(qPath, 'utf-8');
+    const data = JSON.parse(raw);
+    // minimalna walidacja
+    if (!Array.isArray(data.items)) throw new Error('Invalid questions.json');
+    return res.json(data);
+  } catch {
+    return res.json({
+      items: [
+        { id: 1, text: 'Opowiedz krótko o sobie i swoim doświadczeniu.' },
+        { id: 2, text: 'Z jakiego osiągnięcia zawodowego jesteś najbardziej dumny i dlaczego?' }
+      ]
+    });
+  }
 });
 
 // Transkrypcja (Whisper)
