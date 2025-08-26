@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Demo — Symulacja rozmowy kwalifikacyjnej</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <main class="container">
+    <h1>Symulacja rozmowy kwalifikacyjnej — demo</h1>
+    <p class="muted">2 pytania → 2 odpowiedzi → transkrypcja (Whisper) → pobierz .txt</p>
+
+    <section id="setup">
+      <button id="btnStart" class="primary">Start symulacji</button>
+      <p id="supportNote" class="note"></p>
+    </section>
+
+    <section id="qa" class="hidden">
+      <div class="question">
+        <h2>Pytanie <span id="qIndex">1</span>/2</h2>
+        <p id="qText"></p>
+        <audio id="qAudio" controls class="hidden"></audio>
+        <div class="row">
+          <button id="btnPlayQ" class="secondary" disabled>Odtwórz pytanie</button>
+        </div>
+      </div>
+
+      <div class="answer">
+        <h3>Twoja odpowiedź</h3>
+        <div class="row">
+          <button id="btnRec" class="danger">● Nagrywaj (max 180 s)</button>
+          <span id="timer" class="timer">00:00</span>
+        </div>
+        <audio id="aAudio" controls class="hidden"></audio>
+        <div class="row">
+          <button id="btnTranscribe" class="primary" disabled>Wyślij do transkrypcji</button>
+        </div>
+        <pre id="aText" class="transcript"></pre>
+      </div>
+
+      <div class="nav">
+        <button id="btnNext" class="primary" disabled>Dalej ▶</button>
+      </div>
+    </section>
+
+    <section id="finish" class="hidden">
+      <h2>Transkrypcja całej rozmowy</h2>
+      <pre id="fullTranscript" class="transcript"></pre>
+      <button id="btnDownload" class="primary">Pobierz transkrypcję (.txt)</button>
+      <button id="btnReset" class="secondary">Zacznij od nowa</button>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>
