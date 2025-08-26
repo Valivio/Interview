@@ -1,0 +1,14 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "text": "Opowiedz krótko o sobie i swoim doświadczeniu. Podkreśl umiejętności istotne dla stanowiska.",
+      "audioUrl": "/questions/question1.mp3"
+    },
+    {
+      "id": 2,
+      "text": "Z jakiego osiągnięcia zawodowego jesteś najbardziej dumny i dlaczego? Opisz też swój wkład.",
+      "audioUrl": "/questions/question2.mp3"
+    }
+  ]
+}
