@@ -3,54 +3,82 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Demo — Symulacja rozmowy kwalifikacyjnej</title>
+  <title>Symulacja rozmowy kwalifikacyjnej — demo</title>
   <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
-  <main class="container">
-    <h1>Symulacja rozmowy kwalifikacyjnej — demo</h1>
-    <p class="muted">2 pytania → 2 odpowiedzi → transkrypcja (Whisper) → pobierz .txt</p>
-
-    <section id="setup">
-      <button id="btnStart" class="primary">Start symulacji</button>
-      <p id="supportNote" class="note"></p>
-    </section>
-
-    <section id="qa" class="hidden">
-      <div class="question">
-        <h2>Pytanie <span id="qIndex">1</span>/2</h2>
-        <p id="qText"></p>
-        <audio id="qAudio" controls class="hidden"></audio>
-        <div class="row">
-          <button id="btnPlayQ" class="secondary" disabled>Odtwórz pytanie</button>
+  <header class="hero">
+    <div class="wrap">
+      <div class="brand">
+        <div class="logo">🎤</div>
+        <div>
+          <h1>Symulacja rozmowy kwalifikacyjnej — demo</h1>
+          <p class="tag">2 pytania → 2 odpowiedzi → transkrypcja (Whisper) → pobierz .txt</p>
         </div>
       </div>
+      <!-- delikatna fala tła -->
+      <svg class="hero-art" viewBox="0 0 1200 200" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="g1" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#7c9cff" />
+            <stop offset="100%" stop-color="#7ee0c4" />
+          </linearGradient>
+        </defs>
+        <path d="M0,120 C200,60 400,180 600,120 C800,60 1000,140 1200,90 L1200,200 L0,200 Z" fill="url(#g1)" opacity="0.35"/>
+      </svg>
+    </div>
+  </header>
 
-      <div class="answer">
-        <h3>Twoja odpowiedź</h3>
-        <div class="row">
-          <button id="btnRec" class="danger">● Nagrywaj (max 180 s)</button>
-          <span id="timer" class="timer">00:00</span>
+  <main class="wrap">
+    <div class="app-card">
+      <!-- SETUP -->
+      <section id="setup">
+        <button id="btnStart" class="primary">Start symulacji</button>
+        <p id="supportNote" class="muted" style="margin-top:10px;"></p>
+      </section>
+
+      <!-- QA -->
+      <section id="qa" class="hidden">
+        <div class="question">
+          <h2>Pytanie <span id="qIndex">1</span>/2</h2>
+          <p id="qText" class="muted" style="margin-bottom:10px"></p>
+          <audio id="qAudio" controls></audio>
+          <div class="row"><button id="btnPlayQ" class="secondary">Odtwórz pytanie</button></div>
         </div>
-        <audio id="aAudio" controls class="hidden"></audio>
-        <div class="row">
-          <button id="btnTranscribe" class="primary" disabled>Wyślij do transkrypcji</button>
+
+        <div class="answer">
+          <h3>Twoja odpowiedź</h3>
+          <div class="row">
+            <button id="btnRec" class="danger">Nagrywaj (max 180 s)</button>
+            <span id="timer" class="timer">00:00</span>
+          </div>
+          <audio id="aAudio" controls class="hidden"></audio>
+          <div class="row">
+            <button id="btnTranscribe" class="primary" disabled>Wyślij do transkrypcji</button>
+          </div>
+          <pre id="aText" class="transcript"></pre>
         </div>
-        <pre id="aText" class="transcript"></pre>
-      </div>
 
-      <div class="nav">
-        <button id="btnNext" class="primary" disabled>Dalej ▶</button>
-      </div>
-    </section>
+        <div class="nav">
+          <button id="btnNext" class="primary" disabled>Dalej ▶</button>
+        </div>
+      </section>
 
-    <section id="finish" class="hidden">
-      <h2>Transkrypcja całej rozmowy</h2>
-      <pre id="fullTranscript" class="transcript"></pre>
-      <button id="btnDownload" class="primary">Pobierz transkrypcję (.txt)</button>
-      <button id="btnReset" class="secondary">Zacznij od nowa</button>
-    </section>
+      <!-- FINISH -->
+      <section id="finish" class="hidden">
+        <h2>Transkrypcja całej rozmowy</h2>
+        <pre id="fullTranscript" class="transcript"></pre>
+        <div class="row">
+          <button id="btnDownload" class="primary">Pobierz transkrypcję (.txt)</button>
+          <button id="btnReset" class="secondary">Zacznij od nowa</button>
+        </div>
+      </section>
+    </div>
   </main>
+
+  <footer class="wrap foot">
+    <span>Wersja demo – UI minimalistyczne, bez zbędnych kolorów ✨</span>
+  </footer>
 
   <script src="/app.js"></script>
 </body>
