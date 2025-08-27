@@ -39,7 +39,6 @@ body{
   font-size: 24px;
 }
 .brand h1{ margin:0; font-size:28px; letter-spacing:.2px; }
-.brand .tag{ margin:4px 0 0; color:var(--muted); }
 
 .hero-art{
   position:absolute; inset:auto -10% -60px -10%;
@@ -66,7 +65,7 @@ h2{ margin: 10px 0 6px; }
 
 .hidden{ display:none !important; }
 
-/* Grid w pytaniach/odpowiedzi */
+/* Bloki pytania/odpowiedzi */
 .question, .answer{
   background: rgba(255,255,255,0.03);
   border: 1px dashed var(--stroke);
@@ -100,20 +99,29 @@ button.primary{
 button.secondary{
   background: rgba(255,255,255,0.06);
 }
+
+/* Przyciski nagrywania: kropka poza tekstem, tylko w trakcie nagrywania */
 button.danger{
   border-color: #ff8b96;
   color: #ffd7db;
   position: relative;
+  padding-left: 40px;            /* miejsce na kropkę po lewej */
+  white-space: nowrap;
 }
 button.danger::before{
   content:'';
-  position:absolute; left:12px; top:50%; width:8px; height:8px;
+  position:absolute; left:14px; top:50%;
+  width:10px; height:10px;
   transform: translateY(-50%);
   border-radius:50%;
   background: var(--danger);
   box-shadow: 0 0 0 0 rgba(255,90,103,.6);
   animation: pulse 1.4s infinite;
+  display:none;                  /* domyślnie ukryta */
 }
+/* pokaż kropkę tylko gdy trwa nagrywanie (JS dodaje klasę .recording) */
+button.danger.recording::before{ display:block; }
+
 @keyframes pulse{
   0%{ box-shadow: 0 0 0 0 rgba(255,90,103,.6) }
   70%{ box-shadow: 0 0 0 10px rgba(255,90,103,0) }
@@ -137,7 +145,7 @@ button.danger::before{
   padding:12px; border-radius:12px; white-space: pre-wrap;
 }
 
-/* Audio */
+/* Audio (player zostaje widoczny) */
 audio{
   width:100%;
   background: rgba(255,255,255,0.06);
@@ -148,12 +156,7 @@ audio{
 /* Nawigacja */
 .nav{ display:flex; justify-content:flex-end; margin-top: 16px; }
 
-/* Stopka */
-.foot{ color:var(--muted); font-size: 13px; padding-bottom: 40px; }
-.foot a{ color: var(--accent-2); text-decoration: none; border-bottom: 1px dashed transparent }
-.foot a:hover{ border-color: var(--accent-2) }
-
-/* Preferencje systemowe: ciemny/jasny */
+/* Preferencje systemowe: jasny tryb */
 @media (prefers-color-scheme: light){
   :root{
     --bg: radial-gradient(1200px 600px at 80% -10%, #c7d2fe55 0%, transparent 60%),
